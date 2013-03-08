@@ -1,13 +1,13 @@
 <!DOCTYPE html>
+<!-- vim: set ai et ts=2 sw=2 ft=html: -->
 <html lang="{{ article.lang if article and article.lang else DEFAULT_LANG }}">
   <head>
   {% block headers %}
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=endge, chrome=IE8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=IE8" />
     <meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=no" />
     <title>{% block title %}{{ SITENAME }}{%endblock%}</title>
     <!--[if lte IE 8]><script type="text/javascript" src="{{ SITEURL }}/theme/js/html5shiv.js"></script><![endif]-->
-    <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/skeleton.css" />
     <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/theme.css" />
     <link rel="shortcut icon" type="image/png" href="{{ SITEURL }}/favicon.png" />
     <!--[if lte IE 8]><link rel="shortcut icon" type="image/x-icon" href="{{ SITEURL }}/favicon.ico" /><![endif]-->
@@ -22,29 +22,43 @@
   {% endblock headers %}
   </head>
   <body>
-    <div id="page">
-      <header id="page-head">
-        <h1>
-          <a href="{{ SITEURL }}/index.html">{{ SITENAME }}</a>
-        </h1>
+    <div class="page">
+      <header class="page-head">
+        <h1><a href="{{ SITEURL }}/index.html">{{ SITENAME }}</a></h1>
       </header>
-      
-      <div id="page-body">
-        <{%- if article %}article class="post" {% else %}section {% endif -%}id="page-main" role="main">
+
+      <nav class="page-menu" role="navigation">
+        <h2>Menu</h2>
+        <ul>
+          <li><a href="{{ SITEURL }}">Accueil</a></li>
+        {% if MENUITEMS %}
+          {% for name, uri in MENUITEMS %}
+          <li><a href="{{ uri|format(SITEURL)}}">{{ name }}</a></li>
+          {% endfor %}
+        {% endif %}
+        {% if DISPLAY_PAGES_ON_MENU %}
+          {% for p in PAGES %}
+          <li><a href="{{ SITEURL}}/{{ p.url }}"{% if p == page %} class="active"{% endif %}>{{ p.title }}</a></li>
+          {% endfor %}
+        {% endif %}
+          {%- if FEED_ATOM %}<li><a href="{{ FEED_DOMAIN }}/{{ FEED_ATOM }}">Flux ATOM</a></li>{% endif -%}
+          {%- if FEED_RSS %}<li><a href="{{ FEED_DOMAIN }}/{{ FEED_RSS }}">Flux RSS</a></li>{% endif -%}
+          <li><a href="{{ SITEURL }}/categories.html">Catégories</a></li>
+          <li><a href="{{ SITEURL }}/archives.html">Archives</a></li>
+          <li><a href="{{ SITEURL }}/tags.html">Mots-clés</a></li>
+        </ul>
+      </nav> <!-- /.page-menu -->
+
+      <{%- if article %}article {% else %}section {% endif -%} class="page-main" role="main">
 {% block content %}
 {% endblock content %}
-      </{%- if article %}article{% else %}section{% endif -%}> <!-- /#page-main -->
+      </{%- if article %}article{% else %}section{% endif -%}> <!-- /.page-main -->
 
-        <aside id="page-side">
-          {%- include "includes/sidebar.html" -%}
-        </aside> <!-- /#page-side -->
-      </div>  <!-- /#page-body -->
-
-      <footer id="page-foot">
+      <footer class="page-foot">
         <p> {{ FOOTER_TEXT or 'Powered by <a href="http://pelican.readthedocs.org">Pelican</a>' }}</p>
         {% if GITHUB_URL %}<p><a id="github-link" href="{{ GITHUB_URL}}">Fork me on Github</a></p>{% endif %}
       </footer>
-    </div> <!-- /#page -->
+    </div> <!-- /.page -->
     {% if GOOGLE_ANALYTICS %}
     <script type="text/javascript">
       var _gaq = _gaq || [];
