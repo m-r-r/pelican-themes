@@ -30,9 +30,8 @@
         <div class="meta">
             Posté dans «<a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>» 
             par <a href="{{ SITEURL }}/{{ article.author.url }}">{{ article.author}}</a><br />
-            Mots-clés: {% for tag in article.tags %} #<a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>{% endfor %}
+            Mots-clés: {% for tag in article.tags %} <a rel="tag" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>{% endfor %}
         </div>
-      </footer>
       {% if DISQUS_SITENAME %}
       <hr />
       <div id="disqus_thread"></div>
@@ -50,4 +49,5 @@
         <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
         <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
       {% endif %}
+      </footer>
 {% endblock content -%}

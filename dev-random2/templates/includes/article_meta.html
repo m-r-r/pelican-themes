@@ -10,8 +10,8 @@
             {% endif -%}
             {%- if article.translations %}
               <br />Langues: 
-              [<a href="{{ SITEURL }}/{{ article.url }}">{{ article.lang or DEFAULT_LANG }}</a>]
+              <a class="lang active" href="{{ SITEURL }}/{{ article.url }}">{{ article.lang or DEFAULT_LANG }}</a>
               {%- for translation in article.translations %}
-              <a href="{{ SITEURL }}/{{ translation.url }}">{{ translation.lang }}</a>
+              <a rel="alternate" lang="{{ translation.lang }}" href="{{ SITEURL }}/{{ translation.url }}">{{ translation.lang }}</a>
               {% endfor -%}
              {% endif -%}
