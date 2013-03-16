@@ -17,6 +17,11 @@ body, html, div, header, section, nav, footer, article { display: block; margin:
     clear: both;
 }
 
+.page-main {
+    margin-bottom: 3em;
+    margin-top: 3em;
+}
+
 /* In default mode, the menu is displayed horizontally */
 .page-menu h2 {display: none;}
 .page-menu ul {display: block; margin: 0; padding: 0; list-style-type: none; }
@@ -80,8 +85,43 @@ body, html, div, header, section, nav, footer, article { display: block; margin:
 }
 
 /* Misc styles */
-.meta {
-    text-transform: small-caps;
-    font-weight: lighter;
-    color: #ccc;
+header h1, header h2 {
+    padding-bottom: 0;
+    margin-bottom: .25em;
+    color: #444444;
 }
+
+header h1 a, header h2 a,
+header h1 a:visited, header h2 a:visited {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.meta {
+    font-weight: lighter;
+    font-size: 0.85em;
+    color: #999999;
+}
+.meta a[rel="tag"]::before { content: '#'; }
+.meta a.lang.active::before { content: '['; }
+.meta a.lang.active::after { content: ']'; }
+
+.post + .post {
+    margin-top: 3em;
+}
+
+#pagination {
+    margin-top: 3em;
+    text-align: center;
+}
+
+
+.small-title {
+    font-style: italic;
+    font-weight: lighter;
+    font-size: .75em;
+    color: #999999;
+}
+
+.small-title::before { content: '\2192\00A0'; }
+.small-title::after { content: ':'; }
